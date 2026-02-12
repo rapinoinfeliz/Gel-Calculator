@@ -374,6 +374,28 @@ export function renderRecipe(calculatedCarbData, carbTotals, electrolyteSources,
     }
     html += '</div>';
 
+    html += '</div>';
+
+    // Sodium Warning
+    const totalSodium = electrolyteSources.reduce((sum, source) => {
+        const sodiumComp = source.components.find(c => c.name === 'Sodium');
+        return sum + (sodiumComp ? sodiumComp.amount : 0);
+    }, 0);
+    const sodiumPerHour = hours > 0 ? totalSodium / hours : 0;
+
+    if (sodiumPerHour > 3000) {
+        html += `
+            <div class="warning-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <span>Sodium intake >3000 mg/h increases GI risk and electrolyte imbalance.</span>
+                <div class="custom-tooltip">
+                    <strong>High Sodium Warning</strong><br>
+                    Sodium absorption is rate-limited. Highly concentrated solutions increase osmotic load, delay gastric emptying, and raise gastrointestinal risk. Do not exceed 3500 mg sodium per hour. Full replacement of potassium, magnesium, and calcium during exercise is generally unnecessary; excessive electrolyte intake may cause GI distress and fluid–electrolyte imbalance.
+                </div>
+            </div>
+        `;
+    }
+
     container.innerHTML = html;
 }
 
@@ -412,6 +434,23 @@ export function renderRecipeModal(calculatedCarbData, electrolyteSources, isBatc
         metaEl.textContent = `One batch for ${hours}h · ${(totalCarbs / divisor).toFixed(0)}g carbs · ${Math.round((totalCarbs / divisor) * 4)} kcal`;
     } else {
         metaEl.textContent = `${totalGels} gels for ${hours}h · ${(totalCarbs / divisor).toFixed(0)}g carbs/gel`;
+    }
+
+    // Sodium Warning Logic
+    const totalSodium = electrolyteSources.reduce((sum, source) => {
+        const sodiumComp = source.components.find(c => c.name === 'Sodium');
+        return sum + (sodiumComp ? sodiumComp.amount : 0);
+    }, 0);
+    const sodiumPerHour = hours > 0 ? totalSodium / hours : 0;
+
+    let warningHtml = '';
+    if (sodiumPerHour > 3000) {
+        warningHtml = `
+            <div class="warning-box" style="margin-bottom: 20px; cursor: default;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <span>Sodium intake >3000 mg/h increases GI risk and electrolyte imbalance.</span>
+            </div>
+        `;
     }
 
     const body = document.getElementById('modal-body');
@@ -477,6 +516,10 @@ export function renderRecipeModal(calculatedCarbData, electrolyteSources, isBatc
             </div>
         </div>
     `).join('');
+
+    if (warningHtml) {
+        body.insertAdjacentHTML('afterbegin', warningHtml);
+    }
 }
 
 // ── Update Text Displays ──
