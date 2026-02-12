@@ -3,35 +3,38 @@
    ═══════════════════════════════════════════════ */
 
 :root {
-    --bg-0: #111113;
-    --bg-1: #18181b;
-    --bg-2: #1f1f23;
-    --bg-3: #27272a;
+    --bg-0: #0d1117;
+    --bg-1: #161b22;
+    --bg-2: #21262d;
+    --bg-3: #30363d;
 
-    --text-1: #ececef;
-    --text-2: #a1a1aa;
-    --text-3: #63636e;
+    --text-1: #c9d1d9;
+    --text-2: #8b949e;
+    --text-3: #6e7681;
 
-    --accent: #7c7cf0;
-    --accent-dim: rgba(124, 124, 240, 0.1);
-    --teal: #5eadad;
-    --teal-dim: rgba(94, 173, 173, 0.1);
+    --accent: #58a6ff;
+    --accent-dim: rgba(88, 166, 255, 0.1);
 
-    --green: #5bb98c;
-    --green-dim: rgba(91, 185, 140, 0.1);
-    --red: #e06c75;
-    --red-dim: rgba(224, 108, 117, 0.1);
-    --amber: #d4a054;
-    --amber-dim: rgba(212, 160, 84, 0.1);
+    --teal: #3fb950;
+    --teal-dim: rgba(63, 185, 80, 0.1);
 
-    --border: rgba(255, 255, 255, 0.07);
-    --border-focus: rgba(124, 124, 240, 0.4);
+    --green: #238636;
+    --green-dim: rgba(35, 134, 54, 0.1);
+
+    --red: #f85149;
+    --red-dim: rgba(248, 81, 73, 0.1);
+
+    --amber: #d29922;
+    --amber-dim: rgba(210, 153, 34, 0.1);
+
+    --border: #30363d;
+    --border-focus: #58a6ff;
 
     --radius: 12px;
     --radius-sm: 8px;
-    --radius-xs: 5px;
+    --radius-xs: 6px;
 
-    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 *,
@@ -44,7 +47,11 @@
 
 body {
     font-family: var(--font);
-    background: var(--bg-0);
+    background-color: var(--bg-0);
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(88, 166, 255, 0.08) 0%, transparent 70%),
+        radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
     color: var(--text-1);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -89,11 +96,21 @@ body {
 /* ── Cards ── */
 
 .card {
-    background: var(--bg-1);
+    background: rgba(22, 27, 34, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: rgba(88, 166, 255, 0.3);
 }
 
 .card-header {
