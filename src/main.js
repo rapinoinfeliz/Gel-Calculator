@@ -36,7 +36,8 @@ import {
     updateStats,
     updateTargetCarbs,
     showCarbErrors,
-    showToast
+    showToast,
+    setupTooltips
 } from './modules/ui.js';
 
 // ── State ──
@@ -257,6 +258,7 @@ function init() {
     // Populate dropdowns
     populateSweatRateSelect();
     populateSaltinessSelect();
+    setupTooltips();
 
     // Set initial values from state
     document.getElementById('hours').value = state.hours;

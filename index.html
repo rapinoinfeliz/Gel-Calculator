@@ -185,11 +185,31 @@
             <div class="card-content">
                 <div id="elec-auto-inputs" class="grid-2" style="margin-bottom: 16px;">
                     <div class="input-group">
-                        <label>Sweat rate</label>
+                        <label>
+                            Sweat rate
+                            <span class="info-icon" data-tooltip-type="sweat-rate" aria-label="More info">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </span>
+                        </label>
                         <select id="sweat-rate-select" class="select-input"></select>
                     </div>
                     <div class="input-group">
-                        <label>Saltiness</label>
+                        <label>
+                            Saltiness
+                            <span class="info-icon" data-tooltip-type="saltiness" aria-label="More info">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </span>
+                        </label>
                         <select id="saltiness-select" class="select-input"></select>
                     </div>
                 </div>
@@ -276,10 +296,10 @@
         </div>
 
         <footer class="footer">
-            <p>Built for endurance athletes.</p>
         </footer>
     </div>
 
+    <div id="global-tooltip" class="tooltip-box"></div>
     <script type="module" src="src/main.js"></script>
 </body>
 

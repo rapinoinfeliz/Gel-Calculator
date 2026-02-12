@@ -3,11 +3,12 @@
 export const glucoseSourceOptions = [
     { label: 'Dextrose', carbsPerGram: 1.00, glucoseContent: 1.00, fructoseContent: 0 },
     { label: 'Glucose Syrup', carbsPerGram: 0.80, glucoseContent: 1.00, fructoseContent: 0 },
-    { label: 'Maltodextrin', carbsPerGram: 0.98, glucoseContent: 1.00, fructoseContent: 0 },
+    { label: 'Maltodextrin', carbsPerGram: 0.95, glucoseContent: 1.00, fructoseContent: 0 },
     { label: 'Maltose', carbsPerGram: 1.00, glucoseContent: 1.00, fructoseContent: 0 },
     { label: 'Highly Branched Cyclic Dextrin (HBCD)', carbsPerGram: 1.00, glucoseContent: 1.00, fructoseContent: 0 },
     { label: 'Rice Syrup', carbsPerGram: 0.85, glucoseContent: 1.00, fructoseContent: 0 },
     { label: 'Barley Malt Extract', carbsPerGram: 0.80, glucoseContent: 0.95, fructoseContent: 0.05 },
+    { label: 'Waxy Maize Starch', carbsPerGram: 0.87, glucoseContent: 1.00, fructoseContent: 0 },
 ];
 
 export const fructoseSourceOptions = [
@@ -20,6 +21,7 @@ export const fructoseSourceOptions = [
     { label: 'Maple Syrup', carbsPerGram: 0.67, glucoseContent: 0.50, fructoseContent: 0.50 },
     { label: 'Sucrose (Cane Sugar)', carbsPerGram: 1.00, glucoseContent: 0.50, fructoseContent: 0.50 },
     { label: "Coconut Sugar", carbsPerGram: 1.00, glucoseContent: 0.50, fructoseContent: 0.50 },
+    { label: 'Palatinose (Isomaltulose)', carbsPerGram: 1.00, glucoseContent: 0.50, fructoseContent: 0.50 },
 ];
 
 export const allCarbSourceOptions = [...glucoseSourceOptions, ...fructoseSourceOptions];

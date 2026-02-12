@@ -161,16 +161,16 @@ body {
     border-color: var(--border-focus);
 }
 
-.input-with-unit input {
-    width: 56px;
+.input-with-unit input[type="number"] {
+    width: 50px;
     background: transparent;
     border: none;
     color: var(--text-1);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     font-family: var(--font);
     text-align: center;
-    padding: 7px 4px 7px 10px;
+    padding: 6px 0;
     outline: none;
 }
 
@@ -304,7 +304,7 @@ body {
 
 input[type="number"] {
     width: 100%;
-    padding: 7px 9px;
+    padding: 7px 0;
     background: var(--bg-0);
     border: 1px solid var(--border);
     border-radius: var(--radius-xs);
@@ -312,11 +312,23 @@ input[type="number"] {
     font-size: 0.82rem;
     font-family: var(--font);
     transition: border-color 0.15s;
+    text-align: center;
 }
 
 input[type="number"]:focus {
     outline: none;
     border-color: var(--border-focus);
+}
+
+/* Hide number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 .input-sm {
@@ -517,7 +529,7 @@ input[type="range"]::-moz-range-thumb {
     color: var(--text-1);
     font-size: 0.78rem;
     font-family: var(--font);
-    text-align: right;
+    text-align: center;
     transition: border-color 0.15s;
 }
 
@@ -539,6 +551,7 @@ input[type="range"]::-moz-range-thumb {
     color: var(--text-1);
     font-size: 0.78rem;
     font-family: var(--font);
+    text-align: center;
     transition: border-color 0.15s;
 }
 
@@ -1193,4 +1206,64 @@ input[type="range"]::-moz-range-thumb {
     .stats-row {
         flex-wrap: wrap;
     }
+}
+
+/* ── Tooltips ── */
+
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-3);
+    margin-left: 4px;
+    cursor: help;
+    vertical-align: middle;
+    transition: color 0.15s;
+}
+
+.info-icon:hover {
+    color: var(--accent);
+}
+
+.tooltip-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    font-size: 0.72rem;
+    color: var(--text-2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 300;
+    max-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s, visibility 0.15s;
+    pointer-events: none;
+}
+
+.tooltip-box.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tooltip-box li {
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.tooltip-box li:last-child {
+    margin-bottom: 0;
+}
+
+.tooltip-box strong {
+    color: var(--text-1);
+    font-weight: 500;
 }

@@ -45,6 +45,79 @@ export function populateSaltinessSelect() {
     });
 }
 
+
+// ── Tooltips ──
+
+export function setupTooltips() {
+    const tooltip = document.getElementById('global-tooltip');
+    if (!tooltip) return;
+
+    const descriptionsMap = {
+        'sweat-rate': SWEAT_RATE_DESCRIPTIONS,
+        'saltiness': SALTINESS_DESCRIPTIONS
+    };
+
+    document.querySelectorAll('[data-tooltip-type]').forEach(el => {
+        const type = el.dataset.tooltipType;
+        const descriptions = descriptionsMap[type];
+
+        if (!descriptions) return;
+
+        const showTooltip = () => {
+            tooltip.innerHTML = `
+                <ul>
+                    ${descriptions.map(desc => {
+                const [title, ...rest] = desc.split(':');
+                return `<li><strong>${title}:</strong> ${rest.join(':')}</li>`;
+            }).join('')}
+                </ul>
+            `;
+
+            // Position logic
+            const rect = el.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            let top = rect.bottom + 8;
+            let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+
+            // Boundary checks
+            if (left < 10) left = 10;
+            if (left + tooltipRect.width > window.innerWidth - 10) {
+                left = window.innerWidth - tooltipRect.width - 10;
+            }
+
+            tooltip.style.top = `${top + window.scrollY}px`;
+            tooltip.style.left = `${left + window.scrollX}px`;
+            tooltip.classList.add('show');
+        };
+
+        const hideTooltip = () => {
+            tooltip.classList.remove('show');
+        };
+
+        // Mouse events
+        el.addEventListener('mouseenter', showTooltip);
+        el.addEventListener('mouseleave', hideTooltip);
+
+        // Touch events (tap to toggle)
+        el.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // prevent mouse emulation
+            if (tooltip.classList.contains('show')) {
+                hideTooltip();
+            } else {
+                showTooltip();
+            }
+        });
+
+        // Close on outside click
+        document.addEventListener('touchstart', (e) => {
+            if (!el.contains(e.target) && !tooltip.contains(e.target)) {
+                hideTooltip();
+            }
+        });
+    });
+}
+
 // ── Manual Target Inputs ──
 
 export function renderManualTargetInputs(manualTargets) {
